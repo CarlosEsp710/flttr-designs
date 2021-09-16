@@ -5,6 +5,7 @@ import 'package:custom_painter/src/pages/animations_page.dart';
 import 'package:custom_painter/src/retos/cuadrado_animado_page.dart';
 import 'package:custom_painter/src/labs/circular_progress_page.dart';
 import 'package:custom_painter/src/pages/pie_charts_page.dart';
+import 'package:custom_painter/src/pages/slideshow_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: PieChartsPage(),
+      home: SlideshowPage(),
     );
   }
 }
