@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class HeaderCuadrado extends StatelessWidget {
   const HeaderCuadrado({Key? key}) : super(key: key);
 
@@ -297,5 +299,92 @@ class _HeaderGradienteWavesPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
+  }
+}
+
+class IconHeader extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color iconColor;
+  final Color color_1;
+  final Color color_2;
+
+  const IconHeader({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    this.color_1 = const Color(0xFF526DF6),
+    this.color_2 = const Color(0xFF67ACF2),
+    this.iconColor = Colors.white,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        _IconHeaderBackground(
+          color_1: color_1,
+          color_2: color_2,
+        ),
+        Positioned(
+          top: -50,
+          left: -70,
+          child: FaIcon(icon, size: 250, color: iconColor.withOpacity(0.2)),
+        ),
+        Column(
+          children: <Widget>[
+            const SizedBox(height: 80, width: double.infinity),
+            Text(
+              title,
+              style:
+                  TextStyle(fontSize: 20, color: Colors.white.withOpacity(0.7)),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              subtitle,
+              style: const TextStyle(
+                fontSize: 28,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            FaIcon(icon, size: 80, color: iconColor),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _IconHeaderBackground extends StatelessWidget {
+  final Color color_1;
+  final Color color_2;
+
+  const _IconHeaderBackground({
+    Key? key,
+    required this.color_1,
+    required this.color_2,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 300,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(80)),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            color_1,
+            color_2,
+          ],
+        ),
+      ),
+    );
   }
 }
