@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:custom_painter/src/pages/headers_page.dart';
-import 'package:custom_painter/src/pages/animations_page.dart';
-import 'package:custom_painter/src/retos/cuadrado_animado_page.dart';
-import 'package:custom_painter/src/labs/circular_progress_page.dart';
-import 'package:custom_painter/src/pages/pie_charts_page.dart';
-import 'package:custom_painter/src/pages/slideshow_page.dart';
-import 'package:custom_painter/src/pages/pinterest_page.dart';
-import 'package:custom_painter/src/pages/emergency_page.dart';
-import 'package:custom_painter/src/pages/sliver_list_page.dart';
+import 'package:custom_painter/src/pages/launcher_page.dart';
+import 'package:provider/provider.dart';
+
+import 'package:custom_painter/src/theme/theme_cahner.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeChanger(1),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,10 +19,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return MaterialApp(
+      theme: appTheme.currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: SliverListPage(),
+      home: const LauncherPage(),
     );
   }
 }

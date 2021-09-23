@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 class RadialProgress extends StatefulWidget {
   final double percent;
   final Color primaryColor;
-  final Color secundaryColor;
+  final Color secondaryColor;
   final double primaryStrokeWidth;
-  final double secundaryStrokeWidth;
+  final double secondaryStrokeWidth;
 
   const RadialProgress({
     Key? key,
     required this.percent,
     this.primaryColor = Colors.blue,
-    this.secundaryColor = Colors.grey,
-    this.secundaryStrokeWidth = 4.0,
+    this.secondaryColor = Colors.grey,
+    this.secondaryStrokeWidth = 4.0,
     this.primaryStrokeWidth = 10.0,
   }) : super(key: key);
 
@@ -65,9 +65,9 @@ class _RadialProgressState extends State<RadialProgress>
               (widget.percent - percentDifference) +
                   (percentDifference * controller.value),
               widget.primaryColor,
-              widget.secundaryColor,
+              widget.secondaryColor,
               widget.primaryStrokeWidth,
-              widget.secundaryStrokeWidth,
+              widget.secondaryStrokeWidth,
             ),
           ),
         );
@@ -79,16 +79,16 @@ class _RadialProgressState extends State<RadialProgress>
 class _RadialProgress extends CustomPainter {
   final double percent;
   final Color primaryColor;
-  final Color secundaryColor;
+  final Color secondaryColor;
   final double primaryStrokeWidth;
-  final double secundaryStrokeWidth;
+  final double secondaryStrokeWidth;
 
   _RadialProgress(
     this.percent,
     this.primaryColor,
-    this.secundaryColor,
+    this.secondaryColor,
     this.primaryStrokeWidth,
-    this.secundaryStrokeWidth,
+    this.secondaryStrokeWidth,
   );
 
   @override
@@ -113,8 +113,8 @@ class _RadialProgress extends CustomPainter {
     );
 
     final paint = Paint()
-      ..strokeWidth = secundaryStrokeWidth
-      ..color = secundaryColor
+      ..strokeWidth = secondaryStrokeWidth
+      ..color = secondaryColor
       ..style = PaintingStyle.stroke;
 
     Offset center = Offset(size.width * 0.5, size.height / 2);

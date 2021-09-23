@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import 'package:custom_painter/src/widgets/radial_progress.dart';
+import 'package:custom_painter/src/theme/theme_cahner.dart';
 
 class PieChartsPage extends StatefulWidget {
   const PieChartsPage({Key? key}) : super(key: key);
@@ -14,8 +17,11 @@ class _PieChartsPageState extends State<PieChartsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: appTheme.colorScheme.secondary,
         child: const Icon(Icons.refresh),
         onPressed: () {
           setState(() {
@@ -74,13 +80,17 @@ class CustomRadialProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Container(
       width: 180,
       height: 180,
       child: RadialProgress(
         percent: percent,
         primaryColor: primaryColor,
-        secundaryStrokeWidth: 2,
+        secondaryColor:
+            appTheme.currentTheme.textTheme.bodyText1!.color ?? Colors.grey,
+        secondaryStrokeWidth: 2,
       ),
     );
   }
