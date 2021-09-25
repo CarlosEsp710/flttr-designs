@@ -13,27 +13,47 @@ class SlideshowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
 
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Slideshow(
-              primaryColor: (appTheme.darkTheme)
-                  ? appTheme.currentTheme.colorScheme.secondary
-                  : Colors.red,
-              primaryBullet: 12,
-              secondaryBullet: 8,
-              slides: <Widget>[
-                SvgPicture.asset('assets/svg/slide-1.svg'),
-                SvgPicture.asset('assets/svg/slide-2.svg'),
-                SvgPicture.asset('assets/svg/slide-3.svg'),
-                SvgPicture.asset('assets/svg/slide-4.svg'),
-                SvgPicture.asset('assets/svg/slide-5.svg'),
-              ],
-            ),
-          ),
-        ],
+    bool isLarge;
+    (MediaQuery.of(context).size.height > 500)
+        ? isLarge = true
+        : isLarge = false;
+
+    final children = [
+      Expanded(
+        child: MySlideShow(appTheme: appTheme),
       ),
+      Expanded(
+        child: MySlideShow(appTheme: appTheme),
+      ),
+    ];
+
+    return Scaffold(
+      body: (isLarge) ? Column(children: children) : Row(children: children),
+    );
+  }
+}
+
+class MySlideShow extends StatelessWidget {
+  const MySlideShow({
+    Key? key,
+    required this.appTheme,
+  }) : super(key: key);
+
+  final ThemeChanger appTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slideshow(
+      primaryColor: appTheme.currentTheme.colorScheme.secondary,
+      primaryBullet: 12,
+      secondaryBullet: 8,
+      slides: <Widget>[
+        SvgPicture.asset('assets/svg/slide-1.svg'),
+        SvgPicture.asset('assets/svg/slide-2.svg'),
+        SvgPicture.asset('assets/svg/slide-3.svg'),
+        SvgPicture.asset('assets/svg/slide-4.svg'),
+        SvgPicture.asset('assets/svg/slide-5.svg'),
+      ],
     );
   }
 }
